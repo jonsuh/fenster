@@ -95,6 +95,22 @@ module.exports = function(grunt) {
         tasks: ['build-css'],
       },
     },
+
+    browserSync: {
+      watch: {
+        options: {
+          watchTask: true,
+          server: {
+            baseDir: './',
+          },
+        },
+        bsFiles: {
+          src: [
+            'assets/css/*.css',
+          ],
+        },
+      },
+    },
   });
 
   grunt.registerTask('build-css', ['sass:build', 'autoprefixer:build']);
@@ -105,5 +121,5 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-js', ['uglify:dist']);
   grunt.registerTask('dist', ['build', 'dist-css', 'dist-js']);
 
-  grunt.registerTask('default', ['build', 'watch']);
+  grunt.registerTask('default', ['build', 'browserSync', 'watch']);
 };
