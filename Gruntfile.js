@@ -81,6 +81,20 @@ module.exports = function(grunt) {
         }],
       },
     },
+
+    watch: {
+      js: {
+        files: ['assets/js/src/**/*.js'],
+        tasks: ['build-js'],
+      },
+      sass: {
+        // options: {
+        //   livereload: true,
+        // },
+        files: ['assets/sass/**/*.scss'],
+        tasks: ['build-css'],
+      },
+    },
   });
 
   grunt.registerTask('build-css', ['sass:build', 'autoprefixer:build']);
@@ -90,4 +104,6 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-css', ['cssmin:dist']);
   grunt.registerTask('dist-js', ['uglify:dist']);
   grunt.registerTask('dist', ['build', 'dist-css', 'dist-js']);
+
+  grunt.registerTask('default', ['build', 'watch']);
 };
