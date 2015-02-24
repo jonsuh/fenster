@@ -50,11 +50,44 @@ module.exports = function(grunt) {
         }],
       },
     },
+
+    concat: {
+      options: {
+        // sourceMap: true
+      },
+      build: {
+        files: {
+          'assets/js/script.js': [
+            'assets/js/src/app.js',
+          ],
+        },
+      },
+    },
+
+    uglify: {
+      options: {
+        report: 'min',
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd   : 'assets/js/',
+          src   : [
+            '**/*.js',
+            '!src/**/*.js',
+          ],
+          dest  : 'assets/js/',
+          ext   : '.js',
+        }],
+      },
+    },
   });
 
   grunt.registerTask('build-css', ['sass:build', 'autoprefixer:build']);
-  grunt.registerTask('dist-css', ['cssmin:dist']);
+  grunt.registerTask('build-js', ['concat:build']);
+  grunt.registerTask('build', ['build-css', 'build-js']);
 
-  grunt.registerTask('build', ['build-css']);
-  grunt.registerTask('dist', ['build']);
+  grunt.registerTask('dist-css', ['cssmin:dist']);
+  grunt.registerTask('dist-js', ['uglify:dist']);
+  grunt.registerTask('dist', ['build', 'dist-css', 'dist-js']);
 };
