@@ -39,7 +39,8 @@ gulp.task('cssmin', function() {
 
 gulp.task('concat', function() {
   return gulp.src([
-      'assets/js/src/app.js',
+      'assets/js/src/file1.js',
+      'assets/js/src/file2.js',
     ])
     // .pipe(sourcemaps.init())
     .pipe(concat('script.js'))
