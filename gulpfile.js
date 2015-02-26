@@ -38,7 +38,9 @@ gulp.task('cssmin', function() {
 });
 
 gulp.task('concat', function() {
-  return gulp.src('assets/js/src/**/*.js')
+  return gulp.src([
+      'assets/js/src/app.js',
+    ])
     // .pipe(sourcemaps.init())
     .pipe(concat('script.js'))
     // .pipe(sourcemaps.write())
