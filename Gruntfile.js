@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     sass: {
       options: {
         // includePaths: [
-        //   'bower_components/bourbon/dist',
+        //   'bower_components/bourbon/app/assets/stylesheets',
         // ],
         // sourceMap: true,
       },
