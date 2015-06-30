@@ -1,5 +1,5 @@
 {
-  "name": "grunt-starter",
+  "name": "grunt-gulp-starter",
   "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.7.13",
