@@ -1,19 +1,21 @@
 module.exports = function(grunt) {
   require('time-grunt')(grunt);
-  require('jit-grunt')(grunt);
+  require('jit-grunt')(grunt, {
+    force: 'grunt-force-task'
+  });
 
   grunt.initConfig({
     sass: {
       options: {
         // includePaths: [
-        //   'bower_components/bourbon/app/assets/stylesheets',
+        //   'node_modules/bourbon/app/assets/stylesheets',
         // ],
-        // sourceMap: true,
+        sourceMap: true,
       },
       build: {
         files: [{
           expand: true,
-          cwd   : 'assets/sass/',
+          cwd   : 'assets/_sass/',
           src   : ['**/*.scss'],
           dest  : 'assets/css/',
           ext   : '.css',
@@ -51,15 +53,19 @@ module.exports = function(grunt) {
       },
     },
 
+    eslint: {
+      target: ['assets/_js/**/*.js']
+    },
+
     concat: {
       options: {
-        // sourceMap: true
+        sourceMap: true
       },
       build: {
         files: {
           'assets/js/script.js': [
-            'assets/js/src/file1.js',
-            'assets/js/src/file2.js',
+            'assets/_js/file1.js',
+            'assets/_js/file2.js',
           ],
         },
       },
@@ -72,10 +78,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd   : 'assets/js/',
+          cwd   : 'assets/_js/',
           src   : [
             '**/*.js',
-            '!src/**/*.js',
           ],
           dest  : 'assets/js/',
           ext   : '.js',
@@ -85,14 +90,11 @@ module.exports = function(grunt) {
 
     watch: {
       js: {
-        files: ['assets/js/src/**/*.js'],
+        files: ['assets/_js/**/*.js'],
         tasks: ['build-js'],
       },
       sass: {
-        // options: {
-        //   livereload: true,
-        // },
-        files: ['assets/sass/**/*.scss'],
+        files: ['assets/_sass/**/*.scss'],
         tasks: ['build-css'],
       },
     },
@@ -104,10 +106,13 @@ module.exports = function(grunt) {
           server: {
             baseDir: './',
           },
+          open: false,
+          online: false,
+          notify: false,
         },
         bsFiles: {
           src: [
-            'assets/css/*.css',
+            'assets/css/**/*.css',
           ],
         },
       },
@@ -115,7 +120,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build-css', ['sass:build', 'autoprefixer:build']);
-  grunt.registerTask('build-js', ['concat:build']);
+  grunt.registerTask('build-js', ['force:eslint', 'concat:build']);
   grunt.registerTask('build', ['build-css', 'build-js']);
 
   grunt.registerTask('dist-css', ['cssmin:dist']);
