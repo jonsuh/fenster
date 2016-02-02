@@ -28,7 +28,7 @@ Here’s what I have set up:
 
 You’re ready to roll!
 
-To test it out, run `gulp` (or `grunt`), point your browser to `localhost:3000`, and make change to a Sass or JS file, and watch gulp/Grunt work. 
+To test it out, run `gulp` (or `grunt`), point your browser to `localhost:3000`, and make changes to a Sass or JS file, and watch gulp/Grunt work. 
 
 ## Tasks
 
