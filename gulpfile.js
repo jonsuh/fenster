@@ -1,82 +1,119 @@
-var gulp         = require('gulp'),
-    browserSync  = require('browser-sync'),
-    autoprefixer = require('gulp-autoprefixer'),
-    concat       = require('gulp-concat'),
-    cssmin       = require('gulp-minify-css'),
-    filter       = require('gulp-filter'),
-    reload       = browserSync.reload,
-    runSequence  = require('run-sequence'),
-    sass         = require('gulp-sass'),
-    size         = require('gulp-size'),
-    sourcemaps   = require('gulp-sourcemaps'),
-    uglify       = require('gulp-uglify');
+var gulp         = require('gulp');
+var browserSync  = require('browser-sync');
+var autoprefixer = require('gulp-autoprefixer');
+var concat       = require('gulp-concat');
+var cssnano      = require('gulp-cssnano');
+var eslint       = require('gulp-eslint');
+var filter       = require('gulp-filter');
+var notify       = require('gulp-notify');
+var plumber      = require('gulp-plumber');
+var reload       = browserSync.reload;
+var runSequence  = require('run-sequence');
+var sass         = require('gulp-sass');
+var sourcemaps   = require('gulp-sourcemaps');
+var uglify       = require('gulp-uglify');
+
+var onError = function(err) {
+  notify.onError({
+    title:    "Error",
+    message:  "<%= error %>",
+  })(err);
+  this.emit('end');
+};
+
+var plumberOptions = {
+  errorHandler: onError,
+};
 
 gulp.task('sass', function() {
-  return gulp.src('assets/sass/**/*.scss')
-    // .pipe(sourcemaps.init())
-    .pipe(sass({
-      // includePaths: [
-      //   'bower_components/bourbon/app/assets/stylesheets',
-      // ]
-    }))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
-    }))
-    // .pipe(sourcemaps.write())
+  var autoprefixerOptions = {
+    browsers: ['last 2 versions'],
+  };
+
+  var filterOptions = '**/*.css';
+
+  var reloadOptions = {
+    stream: true,
+  };
+
+  var sassOptions = {
+    includePaths: [
+      // 'node_modules/bourbon/app/assets/stylesheets',
+    ]
+  };
+
+  return gulp.src('assets/_sass/**/*.scss')
+    .pipe(plumber(plumberOptions))
+    .pipe(sourcemaps.init())
+    .pipe(sass(sassOptions))
+    .pipe(autoprefixer(autoprefixerOptions))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('assets/css'))
-    .pipe(filter('**/*.css'))
-    .pipe(reload({stream: true}));
+    .pipe(filter(filterOptions))
+    .pipe(reload(reloadOptions));
 });
 
-gulp.task('cssmin', function() {
+gulp.task('cssnano', function() {
   return gulp.src('assets/css/**/*.css')
-    .pipe(cssmin())
-    .pipe(size({
-      showFiles: true
-    }))
+    .pipe(cssnano())
     .pipe(gulp.dest('assets/css'));
 });
 
-gulp.task('concat', function() {
+gulp.task('eslint', function() {
+  var eslintOptions = {
+    extends: 'eslint:recommended',
+    envs: [
+      'browser'
+    ]
+  };
+
+  return gulp.src('assets/_js/**/*.js')
+    .pipe(eslint(eslintOptions))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('concat', ['eslint'], function() {
   return gulp.src([
-      'assets/js/src/file1.js',
-      'assets/js/src/file2.js',
+      'assets/_js/file1.js',
+      'assets/_js/file2.js',
     ])
-    // .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init())
     .pipe(concat('script.js'))
-    // .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('assets/js'));
 });
 
 gulp.task('uglify', function() {
   return gulp.src([
-    'assets/js/**/*.js',
-    '!assets/js/src/**/*.js'
+    'assets/_js/**/*.js',
   ])
     .pipe(uglify())
-    .pipe(size({
-      showFiles: true
-    }))
     .pipe(gulp.dest('assets/js'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('assets/sass/**/*.scss', ['sass']);
-  gulp.watch('assets/js/src/**/*.js', ['concat']);
+  gulp.watch('assets/_sass/**/*.scss', ['sass']);
+  gulp.watch('assets/_js/**/*.js', ['concat']);
 });
 
 gulp.task('browsersync', function() {
   browserSync({
     server: {
       baseDir: './'
-    }
+    },
+    // proxy: 'example.com',
+    open: false,
+    online: false,
+    notify: false,
   });
 });
 
 gulp.task('build', ['sass', 'concat']);
 
-gulp.task('dist', function() {
-  runSequence('build', 'cssmin', 'uglify');
+gulp.task('dist', ['build'], function() {
+  gulp.start('cssnano');
+  gulp.start('uglify');
 });
 
 gulp.task('default', ['build', 'browsersync', 'watch']);
