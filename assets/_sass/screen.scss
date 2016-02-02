@@ -1,1 +1,32 @@
-@import "modules/example";
+@charset "UTF-8";
+// Settings
+// ==================================================
+@import "settings/global";
+@import "settings/colors";
+
+// Tools (Utilities)
+// ==================================================
+@import "tools/functions";
+@import "tools/mixins";
+
+// Generic
+// ==================================================
+@import "generic/normalize";
+
+// Elements (Base) - Unclassed element/type selectors
+// ==================================================
+@import "elements/generic";
+@import "elements/typography";
+
+// Objects - Unstyled, cosmetic-free selectors
+// ==================================================
+@import "objects/grid";
+
+// Components (Modules) - Designed/styled components
+// ==================================================
+@import "components/buttons";
+
+// Trumps
+// ==================================================
+@import "trumps/home";
+@import "trumps/ie8";

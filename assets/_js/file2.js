@@ -2,7 +2,7 @@ var File2 = File2 || {};
 
 File2 = {
   init: function() {
-    console.log("File2 initialized");
+    console.log("File 2 initialized");
   }
 }
 

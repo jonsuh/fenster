@@ -1,0 +1,12 @@
+// Buttons
+// ==================================================
+.button {
+  color: $white;
+  background-color: $blue;
+  padding: 0.7em 1em;;
+  border: 0;
+
+  &:hover {
+    background-color: $grey;
+  }
+}

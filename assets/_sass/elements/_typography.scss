@@ -1,0 +1,23 @@
+// Typography
+// ==================================================
+body {
+  font-family: -apple-system, ".SFNSDisplay-Regular", Roboto, Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+p {
+  color: $grey-dark;
+  line-height: 1.4;
+}
+
+a {
+  color: $blue;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
