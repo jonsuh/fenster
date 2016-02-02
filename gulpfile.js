@@ -60,15 +60,8 @@ gulp.task('cssnano', function() {
 });
 
 gulp.task('eslint', function() {
-  var eslintOptions = {
-    extends: 'eslint:recommended',
-    envs: [
-      'browser'
-    ]
-  };
-
   return gulp.src('assets/_js/**/*.js')
-    .pipe(eslint(eslintOptions))
+    .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 });
