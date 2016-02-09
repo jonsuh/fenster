@@ -19,14 +19,18 @@
     "autoprefixer": "postcss --use autoprefixer -b 'last 2 versions' --dir assets/css assets/css/**/*.css",
     "cssnano": "postcss --use cssnano --dir assets/css assets/css/**/*.css",
     "eslint": "eslint --config './.eslintrc' ./assets/_js/**/*.js; exit 0",
-    "concat": "concat-cli -f ./assets/_js/file1.js ./assets/_js/file2.js -o ./assets/js/script.js",
+    "concat": "concat-cli --files ./assets/_js/file1.js ./assets/_js/file2.js --output assets/js/script.js",
     "babel": "babel --source-maps --out-file ./assets/js/script.js ./assets/js/script.js",
-    "browsersync": "browser-sync start --config ./config.browsersync.js",
-    "build": "npm run sass && npm run concat",
     "uglify": "uglifyjs --compress --mangle --output ./assets/js/script.js ./assets/js/script.js",
+    "browsersync": "browser-sync start --config ./config.browsersync.js",
+    "build": "npm run build:css && npm run build:js",
+      "build:css": "npm run sass && npm run autoprefixer",
+      "build:js": "npm run eslint && npm run concat && npm run babel",
+    "dist": "npm run build && npm run dist:parallel",
+      "dist:parallel": "parallelshell 'npm run cssnano' 'npm run uglify'",
     "watch": "npm run watch:parallel",
-      "watch:sass": "watch 'npm run sass' ./assets/_sass",
-      "watch:js": "watch 'npm run eslint && npm run concat && npm run babel' ./assets/_js",
+      "watch:sass": "watch 'npm run build:css' ./assets/_sass",
+      "watch:js": "watch 'npm run build:js' ./assets/_js",
       "watch:parallel": "parallelshell 'npm run browsersync' 'npm run watch:js' 'npm run watch:sass'"
   }
 }
