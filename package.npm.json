@@ -25,8 +25,8 @@
     "build": "npm run sass && npm run concat",
     "uglify": "uglifyjs --compress --mangle --output ./assets/js/script.js ./assets/js/script.js",
     "watch": "npm run watch:parallel",
-    "watch:sass": "watch 'npm run sass' ./assets/_sass",
-    "watch:js": "watch 'npm run eslint && npm run concat && npm run babel' ./assets/_js",
-    "watch:parallel": "parallelshell 'npm run browsersync' 'npm run watch:js' 'npm run watch:sass'"
+      "watch:sass": "watch 'npm run sass' ./assets/_sass",
+      "watch:js": "watch 'npm run eslint && npm run concat && npm run babel' ./assets/_js",
+      "watch:parallel": "parallelshell 'npm run browsersync' 'npm run watch:js' 'npm run watch:sass'"
   }
 }
