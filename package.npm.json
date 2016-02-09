@@ -1,0 +1,32 @@
+{
+  "name": "npm-starter",
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^6.3.1",
+    "babel-cli": "^6.5.1",
+    "browser-sync": "^2.11.1",
+    "concat-cli": "^4.0.0",
+    "cssnano": "^3.4.0",
+    "eslint": "^1.10.3",
+    "node-sass": "^3.4.2",
+    "parallelshell": "^2.0.0",
+    "postcss-cli": "^2.5.0",
+    "uglify-js": "^2.6.1",
+    "watch": "^0.17.1"
+  },
+  "scripts": {
+    "sass": "node-sass --source-map 'assets/css' assets/_sass --output assets/css; exit 0",
+    "autoprefixer": "postcss --use autoprefixer -b 'last 2 versions' --dir assets/css assets/css/**/*.css",
+    "cssnano": "postcss --use cssnano --dir assets/css assets/css/**/*.css",
+    "eslint": "eslint --config './.eslintrc' ./assets/_js/**/*.js; exit 0",
+    "concat": "concat-cli -f ./assets/_js/file1.js ./assets/_js/file2.js -o ./assets/js/script.js",
+    "babel": "babel --source-maps --out-file ./assets/js/script.js ./assets/js/script.js",
+    "browsersync": "browser-sync start --config ./config.browsersync.js",
+    "build": "npm run sass && npm run concat",
+    "uglify": "uglifyjs --compress --mangle --output ./assets/js/script.js ./assets/js/script.js",
+    "watch": "npm run watch:parallel",
+    "watch:sass": "watch 'npm run sass' ./assets/_sass",
+    "watch:js": "watch 'npm run eslint && npm run concat && npm run babel' ./assets/_js",
+    "watch:parallel": "parallelshell 'npm run browsersync' 'npm run watch:js' 'npm run watch:sass'"
+  }
+}
