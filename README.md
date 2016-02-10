@@ -2,7 +2,7 @@
 
 gulp/Grunt Starter is designed to quickly get a front-end development environment up-and-running.
 
-gulp is the default setup, but if you prefer to use Grunt, you can! (more information on using Grunt in [Getting Started](#getting-started)).
+gulp is the default setup, but if you prefer to use Grunt, you can! (more information on using Grunt in [Installation](#installation)).
 
 ## Setup
 
