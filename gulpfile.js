@@ -6,7 +6,6 @@ var cssnano      = require('gulp-cssnano');
 var eslint       = require('gulp-eslint');
 var notify       = require('gulp-notify');
 var plumber      = require('gulp-plumber');
-var runSequence  = require('run-sequence');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var uglify       = require('gulp-uglify');
