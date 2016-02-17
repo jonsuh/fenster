@@ -1,9 +1,11 @@
 var gulp         = require('gulp');
 var browserSync  = require('browser-sync');
 var autoprefixer = require('gulp-autoprefixer');
+var babel        = require('gulp-babel');
 var concat       = require('gulp-concat');
 var cssnano      = require('gulp-cssnano');
 var eslint       = require('gulp-eslint');
+var newer        = require('gulp-newer');
 var notify       = require('gulp-notify');
 var plumber      = require('gulp-plumber');
 var sass         = require('gulp-sass');
@@ -49,19 +51,44 @@ gulp.task('cssnano', function() {
     .pipe(gulp.dest('assets/css'));
 });
 
+gulp.task('copy-js', function() {
+  gulp.start('copy-react');
+  gulp.start('copy-react-dom');
+});
+
+gulp.task('copy-react', function() {
+  return gulp.src('node_modules/react/dist/react.js')
+    .pipe(newer('assets/_js/vendor/react.js'))
+    .pipe(gulp.dest('assets/_js/vendor'));
+});
+gulp.task('copy-react-dom', function() {
+  return gulp.src('node_modules/react-dom/dist/react-dom.js')
+    .pipe(newer('assets/_js/vendor/react-dom.js'))
+    .pipe(gulp.dest('assets/_js/vendor'));
+});
+
 gulp.task('eslint', function() {
-  return gulp.src('assets/_js/**/*.js')
+  return gulp.src([
+      'assets/_js/**/*.js',
+      '!assets/_js/vendor/**/*.js', // Exclude vendor folder
+      'assets/_jsx/**/*.jsx'
+    ])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 });
 
-gulp.task('concat', ['eslint'], function() {
+gulp.task('concat', ['copy-js', 'eslint'], function() {
   return gulp.src([
+      'assets/_js/vendor/react.js',
+      'assets/_js/vendor/react-dom.js',
       'assets/_js/file1.js',
       'assets/_js/file2.js',
+      'assets/_jsx/file1.jsx',
+      'assets/_jsx/file2.jsx'
     ])
     .pipe(sourcemaps.init())
+    .pipe(babel())
     .pipe(concat('script.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('assets/js'));
@@ -87,7 +114,7 @@ gulp.task('watch', function() {
   });
 
   gulp.watch('assets/_sass/**/*.scss', ['sass']);
-  gulp.watch('assets/_js/**/*.js', ['concat']);
+  gulp.watch('assets/_{js,jsx}/**/*.{js,jsx}', ['concat']);
 });
 
 gulp.task('build', ['sass', 'concat']);
