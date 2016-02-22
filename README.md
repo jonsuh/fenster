@@ -15,7 +15,7 @@ Here’s what I have set up:
 - Sourcemaps
 - Watch and rebuild Sass and JavaScript
 - Browsersync
-- Minify CSS and JavaScript
+- CSScomb CSS, Minify CSS and JavaScript
 
 ## Installation
 
@@ -39,7 +39,7 @@ Default, development task that runs the build task, then watches for changes and
 Build task that autoprefixes and compiles Sass to CSS, lints and concatenates JavaScript.
 
 - `gulp dist`  
-Production task that runs the build task, then minifies the CSS and JavaScript
+Production task that runs the build task, CSScomb’s the CSS, then minifies the CSS and JavaScript
 
 If you’re using Grunt, just replace `gulp` with `grunt` in the above tasks:
 ```
@@ -53,4 +53,5 @@ grunt dist
 - Point your browser to `localhost:3000` and make a change to a Sass file to see Browsersync in action.
 - Browsersync is configured to only refresh CSS changes.
 - To add or remove concatenated JS files, look in lines 71 and 72 of `gulpfile.js` (or 67 and 68 of `Gruntfile.js`).
-- ESLint config file is `.eslintrc`, which is respected by gulp and Grunt.
+- ESLint’s config file `.eslintrc` is respected by gulp and Grunt. More details on [configuring ESLint](http://eslint.org/docs/user-guide/configuring).
+- CSScomb’s config file `.csscomb.dist.json` is configured for production (`dist` tasks). If you are planning on using CSScomb during development (or) to enforce CSS/Sass formatting, you should create a `.csscomb.json` in the root of your project and configure it accordingly (this will not affect the `dist` tasks since they are specifically looking for the `.csscomb.dist.json` file). More details on [configuring CSScomb](https://github.com/csscomb/csscomb.js/blob/master/doc/options.md).
