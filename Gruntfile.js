@@ -106,11 +106,11 @@ module.exports = function(grunt) {
     watch: {
       js: {
         files: ['assets/_js/**/*.js'],
-        tasks: ['build-js'],
+        tasks: ['build:js'],
       },
       sass: {
         files: ['assets/_sass/**/*.scss'],
-        tasks: ['build-css'],
+        tasks: ['build:css'],
       },
     },
 
@@ -134,13 +134,13 @@ module.exports = function(grunt) {
     },
   });
 
-  grunt.registerTask('build-css', ['sass:build', 'autoprefixer:build']);
-  grunt.registerTask('build-js', ['force:eslint', 'concat:build']);
-  grunt.registerTask('build', ['build-css', 'build-js']);
+  grunt.registerTask('build:css', ['sass:build', 'autoprefixer:build']);
+  grunt.registerTask('build:js', ['force:eslint', 'concat:build']);
+  grunt.registerTask('build', ['build:css', 'build:js']);
 
-  grunt.registerTask('dist-css', ['csscomb:dist', 'cssmin:dist']);
-  grunt.registerTask('dist-js', ['uglify:dist']);
-  grunt.registerTask('dist', ['build', 'dist-css', 'dist-js']);
+  grunt.registerTask('dist:css', ['csscomb:dist', 'cssmin:dist']);
+  grunt.registerTask('dist:js', ['uglify:dist']);
+  grunt.registerTask('dist', ['build', 'dist:css', 'dist:js']);
 
   grunt.registerTask('default', ['build', 'browserSync', 'watch']);
 };
