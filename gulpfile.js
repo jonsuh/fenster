@@ -2,6 +2,7 @@ var gulp         = require('gulp');
 var browserSync  = require('browser-sync');
 var autoprefixer = require('gulp-autoprefixer');
 var concat       = require('gulp-concat');
+var csscomb      = require('gulp-csscomb');
 var cssnano      = require('gulp-cssnano');
 var eslint       = require('gulp-eslint');
 var notify       = require('gulp-notify');
@@ -43,8 +44,9 @@ gulp.task('sass', function() {
     .pipe(browserSync.stream());
 });
 
-gulp.task('cssnano', function() {
+gulp.task('dist:css', function() {
   return gulp.src('assets/css/**/*.css')
+    .pipe(csscomb('.csscomb.dist.json'))
     .pipe(cssnano())
     .pipe(gulp.dest('assets/css'));
 });
@@ -67,7 +69,7 @@ gulp.task('concat', ['eslint'], function() {
     .pipe(gulp.dest('assets/js'));
 });
 
-gulp.task('uglify', function() {
+gulp.task('dist:js', function() {
   return gulp.src([
       'assets/_js/**/*.js',
     ])
@@ -93,8 +95,8 @@ gulp.task('watch', function() {
 gulp.task('build', ['sass', 'concat']);
 
 gulp.task('dist', ['build'], function() {
-  gulp.start('cssnano');
-  gulp.start('uglify');
+  gulp.start('dist:css');
+  gulp.start('dist:js');
 });
 
 gulp.task('default', ['build', 'watch']);

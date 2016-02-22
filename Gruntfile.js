@@ -38,6 +38,21 @@ module.exports = function(grunt) {
       },
     },
 
+    csscomb: {
+      options: {
+        config: '/.csscomb.dist.json'
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd   : 'assets/css/',
+          src   : ['**/*.css'],
+          dest  : 'assets/css/',
+          ext   : '.css',
+        }],
+      }
+    },
+
     cssmin: {
       options: {
         report: 'min',
@@ -123,7 +138,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build-js', ['force:eslint', 'concat:build']);
   grunt.registerTask('build', ['build-css', 'build-js']);
 
-  grunt.registerTask('dist-css', ['cssmin:dist']);
+  grunt.registerTask('dist-css', ['csscomb:dist', 'cssmin:dist']);
   grunt.registerTask('dist-js', ['uglify:dist']);
   grunt.registerTask('dist', ['build', 'dist-css', 'dist-js']);
 
