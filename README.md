@@ -48,7 +48,7 @@ grunt build
 grunt dist
 ```
 
-## Bash function
+## `gulpify` Bash function
 
 Since this project is something I use personally, I created a Bash function `gulpify` to use this repo to quickly get a project up-and-running.
 
