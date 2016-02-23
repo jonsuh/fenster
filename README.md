@@ -53,6 +53,6 @@ grunt dist
 - Point your browser to `localhost:3000` and make a change to a Sass file to see Browsersync in action.
 - To add or remove concatenated JS files, look in lines 62 and 63 of `gulpfile.js` (or 80 and 81 of `Gruntfile.js`).
 - Config files (`.csscomb.dist.json`, `.editorconfig`, `.eslintrc`, `bs-config.js` and `config.postcss.json`) are shared by gulp and Grunt.
-- Browsersync’s config file `bs-config` is configured to serve from the root directory (`./`) and refresh CSS changes. More details on [configuring Browsersync](https://www.browsersync.io/docs/options/).
+- Browsersync’s config file `bs-config.js` is configured to serve from the root directory (`./`) and refresh CSS changes. More details on [configuring Browsersync](https://www.browsersync.io/docs/options/).
 - CSScomb’s config file `.csscomb.dist.json` is configured for production (`dist` tasks). If you are planning on using CSScomb during development (or) to enforce CSS/Sass formatting, you should create a `.csscomb.json` in the root of your project and configure it accordingly (this will not affect the `dist` tasks since they are specifically looking for the `.csscomb.dist.json` file). More details on [configuring CSScomb](https://github.com/csscomb/csscomb.js/blob/master/doc/options.md).
 - ESLint’s config file `.eslintrc` is configured to use the `eslint:recommended` configuration, and is slightly extended. More details on [configuring ESLint](http://eslint.org/docs/user-guide/configuring).
