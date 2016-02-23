@@ -15,7 +15,7 @@ Here’s what I have set up:
 - Sourcemaps
 - Watch and rebuild Sass and JavaScript
 - Browsersync
-- CSScomb CSS, Minify CSS and JavaScript
+- CSScomb, Minify CSS and JavaScript
 
 ## Installation
 
