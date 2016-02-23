@@ -48,6 +48,40 @@ grunt build
 grunt dist
 ```
 
+## Bash function
+
+Since this project is something I use personally, I created a Bash function `gulpify` to use this repo to quickly get a project up-and-running.
+
+Put the following in your `~/.bash_profile` or alike:
+
+```
+gulpify() {
+  if [ "$1" ]; then
+    git clone git@github.com:jonsuh/gulp-grunt-starter.git /path/to/projects/$1
+    cd /path/to/projects/$1
+    # rm Gruntfile.js package.grunt.json
+    sudo rm -R .git
+    npm install
+  else
+    echo -e "ERROR: Specify a directory name to gulpify."
+  fi
+}
+```
+
+Replace `/path/to/projects/` with your working (project) directory.
+
+Uncomment and modify the commented-out line (`# rm Gruntfile.js...`) with commands that you’ll be running to remove/modify files that prior to running `npm install`. For example, this project prefers gulp; however, if you want to use Grunt, you’d want to remove the existing `package.json` and rename `package.grunt.json` to `package.json`, so you may want to modify that line to something like this:
+
+```
+rm gulpfile.js package.json && mv package.grunt.json package.json
+```
+
+Restart Terminal (or reload `~/.bash_profile` by running `source ~/.bash_profile`).
+
+Then run `gulpify project-folder-name`, and voila.
+
+You can also rename the function to whatever you’d like by replacing line 1 `gulpify()` to `callitwhateveryouwant()`.
+
 ## Notes
 
 - Point your browser to `localhost:3000` and make a change to a Sass file to see Browsersync in action.
