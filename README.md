@@ -54,6 +54,8 @@ Since this project is something I use personally, I created a Bash function `gul
 
 I simply run `gulpify project-name` and it clones the repo in directory project-name, cd’s to the new directory, modifies/remove any files I don’t need, and runs `npm install`.
 
+### Installation
+
 Put the following in your `~/.bash_profile` or alike:
 
 ```
