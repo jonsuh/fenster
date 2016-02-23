@@ -24,9 +24,7 @@ module.exports = function(grunt) {
     },
 
     autoprefixer: {
-      options: {
-        browsers: ['last 2 versions', 'ie 8', 'ie 9'],
-      },
+      options: grunt.file.readJSON('./config.postcss.json').autoprefixer,
       build: {
         files: [{
           expand: true,
@@ -116,20 +114,7 @@ module.exports = function(grunt) {
 
     browserSync: {
       watch: {
-        options: {
-          watchTask: true,
-          server: {
-            baseDir: './',
-          },
-          open: false,
-          online: false,
-          notify: false,
-        },
-        bsFiles: {
-          src: [
-            'assets/css/**/*.css',
-          ],
-        },
+        options: require('./bs-config.js'),
       },
     },
   });

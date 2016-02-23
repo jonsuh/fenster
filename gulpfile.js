@@ -24,9 +24,8 @@ var plumberOptions = {
 };
 
 gulp.task('sass', function() {
-  var autoprefixerOptions = {
-    browsers: ['last 2 versions'],
-  };
+  var postCSSOptions = require('./config.postcss.json');
+  var autoprefixerOptions = postCSSOptions.autoprefixer;
 
   var sassOptions = {
     includePaths: [
@@ -78,15 +77,9 @@ gulp.task('dist:js', function() {
 });
 
 gulp.task('watch', function() {
-  browserSync.init({
-    server: {
-      baseDir: './'
-    },
-    // proxy: 'example.com',
-    open: false,
-    online: false,
-    notify: false,
-  });
+  var browserSyncConfig = require('./bs-config.js');
+
+  browserSync.init(browserSyncConfig);
 
   gulp.watch('assets/_sass/**/*.scss', ['sass']);
   gulp.watch('assets/_js/**/*.js', ['concat']);
