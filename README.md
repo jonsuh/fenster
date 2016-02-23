@@ -64,7 +64,7 @@ gulpify() {
     git clone git@github.com:jonsuh/gulp-grunt-starter.git /path/to/projects/$1
     cd /path/to/projects/$1
     # rm Gruntfile.js package.grunt.json
-    sudo rm -R .git
+    rm -rf .git
     npm install
   else
     echo -e "ERROR: Specify a directory name to gulpify."
