@@ -69,7 +69,7 @@ gulp.task('concat', ['eslint'], function() {
 
 gulp.task('dist:js', function() {
   return gulp.src([
-      'assets/_js/**/*.js',
+      'assets/js/**/*.js',
     ])
     .pipe(uglify())
     .pipe(gulp.dest('assets/js'));
