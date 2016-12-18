@@ -2,7 +2,7 @@
   "name": "gulp-starter",
   "dependencies": {},
   "devDependencies": {
-    "browser-sync": "^2.18.1",
+    "browser-sync": "^2.18.5",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-concat": "^2.6.1",
@@ -12,7 +12,7 @@
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.3.2",
-    "gulp-sourcemaps": "^1.9.0",
+    "gulp-sourcemaps": "^1.9.1",
     "gulp-uglify": "^1.5.4"
   }
 }
