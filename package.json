@@ -14,7 +14,7 @@
   "scripts": {
     "sass": "node-sass assets/_sass --output assets/css",
     "postcss": "postcss --config config.postcss.json --map inline --dir assets/css assets/css/*.css",
-    "dist:postcss": "postcss --config config.postcss.production.json --no-map --dir assets/css assets/css/*.css",
+    "dist:postcss": "postcss --config config.postcss.dist.json --no-map --dir assets/css assets/css/*.css",
     "browsersync": "browser-sync start --config bs-config.js",
     "watch": "yarn run watch:parallel",
     "watch:parallel": "parallelshell 'yarn run browsersync' 'yarn run watch:sass'",
