@@ -15,7 +15,7 @@
     "postcss": "postcss --use autoprefixer --config config.postcss.json --map inline --dir assets/css assets/css/*.css",
     "css": "yarn run sass && yarn run postcss",
     "browsersync": "browser-sync start --config bs-config.js",
-    "watch": "yarn build:css && yarn run watch:parallel",
+    "watch": "yarn run css && yarn run watch:parallel",
     "watch:parallel": "parallelshell 'yarn run browsersync' 'yarn run watch:sass'",
     "watch:sass": "watch --interval 0.1 'yarn run css' assets/_sass"
   }
