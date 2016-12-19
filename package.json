@@ -5,6 +5,7 @@
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "browser-sync": "^2.18.5",
+    "cssnano": "^3.9.1",
     "node-sass": "^4.1.0",
     "parallelshell": "^2.0.0",
     "postcss-cli": "^2.6.0",
@@ -13,9 +14,11 @@
   "scripts": {
     "sass": "node-sass assets/_sass --output assets/css",
     "postcss": "postcss --config config.postcss.json --map inline --dir assets/css assets/css/*.css",
+    "dist:postcss": "postcss --config config.postcss.production.json --no-map --dir assets/css assets/css/*.css",
     "browsersync": "browser-sync start --config bs-config.js",
     "watch": "yarn run watch:parallel",
     "watch:parallel": "parallelshell 'yarn run browsersync' 'yarn run watch:sass'",
-    "watch:sass": "watch --interval 0.1 'yarn run sass && yarn run postcss' assets/_sass"
+    "watch:sass": "watch --interval 0.1 'yarn run sass && yarn run postcss' assets/_sass",
+    "dist:css": "yarn run sass && yarn run dist:postcss"
   }
 }
