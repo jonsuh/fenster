@@ -12,7 +12,7 @@
   },
   "scripts": {
     "sass": "node-sass assets/_sass --output assets/css",
-    "postcss": "postcss --use autoprefixer --config config.postcss.json --map inline --dir assets/css assets/css/*.css",
+    "postcss": "postcss --config config.postcss.json --map inline --dir assets/css assets/css/*.css",
     "browsersync": "browser-sync start --config bs-config.js",
     "watch": "yarn run watch:parallel",
     "watch:parallel": "parallelshell 'yarn run browsersync' 'yarn run watch:sass'",
