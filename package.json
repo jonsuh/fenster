@@ -7,6 +7,7 @@
     "browser-sync": "^2.18.5",
     "cssnano": "^3.9.1",
     "eslint": "^3.12.2",
+    "imagemin-cli": "^3.0.0",
     "node-sass": "^4.1.0",
     "parallelshell": "^2.0.0",
     "postcss-cli": "^2.6.0",
@@ -21,12 +22,13 @@
     "concat": "source-map-concat assets/_js/app.js --output assets/js/app.js",
     "eslint": "eslint --config '.eslintrc' assets/_js/**/*.js; exit 0",
     "uglify": "uglifyjs --compress --mangle --output assets/js/app.js assets/js/app.js",
+    "imagemin": "imagemin assets/images/* --out-dir dist/assets/images; exit 0",
     "browsersync": "browser-sync start --config bs-config.js",
     "watch": "yarn run watch:parallel",
     "watch:parallel": "parallelshell 'yarn run browsersync' 'yarn run watch:sass' 'yarn run watch:js'",
     "watch:sass": "watch --interval 0.1 'yarn run sass && yarn run postcss' assets/_sass",
     "watch:js": "watch --interval 0.1 'yarn run eslint && yarn run concat' assets/_js",
-    "dist": "parallelshell 'yarn run dist:css' 'yarn run dist:js'",
+    "dist": "parallelshell 'yarn run dist:css' 'yarn run dist:js' 'yarn run imagemin'",
     "dist:css": "yarn run sass && yarn run dist:postcss",
     "dist:js": "yarn run eslint && yarn run concat && yarn run uglify && rm assets/js/*.map"
   }
