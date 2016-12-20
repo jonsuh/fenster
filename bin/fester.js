@@ -20,6 +20,7 @@ if (flag === "-t" || flag === "--type") {
       switch(type) {
         case "gulp":
           // copy gulpfile.js
+          copyFile("bin/src/gulpfile.js", "gulpfile.js");
           break;
         case "grunt":
           // copy Gruntfile.js
@@ -63,3 +64,17 @@ catch(error) {
   }
 }
 
+
+// Copy file function
+function copyFile(source, dest) {
+  fs.open(source, "r", function(error) {
+    if (error) {
+      console.log(error);
+      process.exit(1);
+    }
+    else {
+      fs.createReadStream(source)
+        .pipe(fs.createWriteStream(dest));
+    }
+  });
+}
