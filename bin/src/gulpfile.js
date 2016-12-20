@@ -2,6 +2,7 @@ var gulp         = require('gulp');
 var browserSync  = require('browser-sync');
 var autoprefixer = require('gulp-autoprefixer');
 var concat       = require('gulp-concat');
+var csscomb      = require('gulp-csscomb');
 var cssnano      = require('gulp-cssnano');
 var eslint       = require('gulp-eslint');
 var imagemin     = require('gulp-imagemin');
@@ -44,6 +45,7 @@ gulp.task('sass', function() {
 
 gulp.task('dist:css', function() {
   return gulp.src('assets/css/**/*.css')
+    .pipe(csscomb('.csscomb.dist.json'))
     .pipe(cssnano())
     .pipe(gulp.dest('dist/assets/css'));
 });
