@@ -4,6 +4,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var concat       = require('gulp-concat');
 var cssnano      = require('gulp-cssnano');
 var eslint       = require('gulp-eslint');
+var imagemin     = require('gulp-imagemin');
 var notify       = require('gulp-notify');
 var plumber      = require('gulp-plumber');
 var sass         = require('gulp-sass');
@@ -72,6 +73,14 @@ gulp.task('dist:js', function() {
     .pipe(gulp.dest('dist/assets/js'));
 });
 
+gulp.task('imagemin', function() {
+  return gulp.src([
+      'assets/images/*'
+    ])
+    .pipe(imagemin())
+    .pipe(gulp.dest('dist/assets/images'));
+});
+
 gulp.task('watch', function() {
   var browserSyncConfig = require('./bs-config.js');
 
@@ -86,6 +95,7 @@ gulp.task('build', ['sass', 'concat']);
 gulp.task('dist', ['build'], function() {
   gulp.start('dist:css');
   gulp.start('dist:js');
+  gulp.start('imagemin');
 });
 
 gulp.task('default', ['build', 'watch']);
