@@ -26,6 +26,7 @@
     "watch:parallel": "parallelshell 'yarn run browsersync' 'yarn run watch:sass' 'yarn run watch:js'",
     "watch:sass": "watch --interval 0.1 'yarn run sass && yarn run postcss' assets/_sass",
     "watch:js": "watch --interval 0.1 'yarn run eslint && yarn run concat' assets/_js",
+    "dist": "parallelshell 'yarn run dist:css' 'yarn run dist:js'",
     "dist:css": "yarn run sass && yarn run dist:postcss",
     "dist:js": "yarn run eslint && yarn run concat && yarn run uglify && rm assets/js/*.map"
   }
