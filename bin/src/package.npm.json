@@ -29,6 +29,6 @@
     "dist": "npm run mkdirp && parallelshell 'npm run dist:css' 'npm run dist:js' 'npm run imagemin'",
     "dist:mkdirp": "mkdirp dist/assets/js dist/assets/css mkdirp dist/assets/images",
     "dist:css": "npm run sass && npm run dist:postcss",
-    "dist:js": "npm run eslint && npm run concat && npm run uglify && rm assets/js/*.map"
+    "dist:js": "npm run eslint && npm run concat && npm run uglify"
   }
 }

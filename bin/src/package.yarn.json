@@ -29,6 +29,6 @@
     "dist": "yarn run mkdirp && parallelshell 'yarn run dist:css' 'yarn run dist:js' 'yarn run imagemin'",
     "dist:mkdirp": "mkdirp dist/assets/js dist/assets/css mkdirp dist/assets/images",
     "dist:css": "yarn run sass && yarn run dist:postcss",
-    "dist:js": "yarn run eslint && yarn run concat && yarn run uglify && rm assets/js/*.map"
+    "dist:js": "yarn run eslint && yarn run concat && yarn run uglify"
   }
 }
