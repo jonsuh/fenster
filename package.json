@@ -11,6 +11,7 @@
     "parallelshell": "^2.0.0",
     "postcss-cli": "^2.6.0",
     "source-map-concat-cli": "^1.0.0",
+    "uglify-js": "^2.7.5",
     "watch": "^1.0.1"
   },
   "scripts": {
@@ -19,11 +20,13 @@
     "dist:postcss": "postcss --config config.postcss.dist.json --no-map --dir assets/css assets/css/*.css",
     "concat": "source-map-concat assets/_js/app.js --output assets/js/app.js",
     "eslint": "eslint --config '.eslintrc' assets/_js/**/*.js; exit 0",
+    "uglify": "uglifyjs --compress --mangle --output assets/js/app.js assets/js/app.js",
     "browsersync": "browser-sync start --config bs-config.js",
     "watch": "yarn run watch:parallel",
     "watch:parallel": "parallelshell 'yarn run browsersync' 'yarn run watch:sass' 'yarn run watch:js'",
     "watch:sass": "watch --interval 0.1 'yarn run sass && yarn run postcss' assets/_sass",
     "watch:js": "watch --interval 0.1 'yarn run eslint && yarn run concat' assets/_js",
-    "dist:css": "yarn run sass && yarn run dist:postcss"
+    "dist:css": "yarn run sass && yarn run dist:postcss",
+    "dist:js": "yarn run eslint && yarn run concat && yarn run uglify && rm assets/js/*.map"
   }
 }
