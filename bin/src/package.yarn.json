@@ -2,6 +2,7 @@
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "browser-sync": "^2.18.5",
+    "csscomb": "^3.1.7",
     "cssnano": "^3.9.1",
     "eslint": "^3.12.2",
     "imagemin-cli": "^3.0.0",
@@ -16,6 +17,7 @@
   "scripts": {
     "sass": "node-sass assets/_sass --output assets/css",
     "postcss": "postcss --config config.postcss.json --map inline --dir assets/css assets/css/*.css",
+    "dist:csscomb": "csscomb --config .csscomb.dist.json dist/assets/css",
     "dist:postcss": "postcss --config config.postcss.dist.json --no-map --dir dist/assets/css assets/css/*.css",
     "concat": "source-map-concat assets/_js/app.js --output assets/js/app.js",
     "eslint": "eslint --config '.eslintrc' assets/_js/**/*.js; exit 0",
@@ -28,7 +30,7 @@
     "watch:js": "watch --interval 0.1 'yarn run eslint && yarn run concat' assets/_js",
     "dist": "yarn run mkdirp && parallelshell 'yarn run dist:css' 'yarn run dist:js' 'yarn run imagemin'",
     "dist:mkdirp": "mkdirp dist/assets/js dist/assets/css mkdirp dist/assets/images",
-    "dist:css": "yarn run sass && yarn run dist:postcss",
+    "dist:css": "yarn run sass && yarn run postcss && yarn run dist:csscomb && yarn run dist:postcss",
     "dist:js": "yarn run eslint && yarn run concat && yarn run uglify"
   }
 }
