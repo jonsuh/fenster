@@ -29,8 +29,9 @@
     "watch:parallel": "parallelshell 'npm run browsersync' 'npm run watch:sass' 'npm run watch:js'",
     "watch:sass": "watch --interval 0.1 'npm run sass && npm run postcss' assets/_sass",
     "watch:js": "watch --interval 0.1 'npm run eslint && npm run concat' assets/_js",
-    "dist": "npm run mkdirp && parallelshell 'npm run dist:css' 'npm run dist:js' 'npm run imagemin'",
-    "dist:mkdirp": "mkdirp dist/assets/js dist/assets/css mkdirp dist/assets/images",
+    "build": "parallelshell 'npm run css' 'npm run js'",
+    "dist": "npm run dist:mkdirp && parallelshell 'npm run dist:css' 'npm run dist:js' 'npm run imagemin'",
+    "dist:mkdirp": "mkdirp dist/assets/js",
     "dist:css": "npm run dist:postcss",
     "dist:js": "npm run uglify"
   }

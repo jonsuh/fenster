@@ -32,8 +32,9 @@
     "watch:parallel": "parallelshell 'yarn run browsersync' 'yarn run watch:sass' 'yarn run watch:js'",
     "watch:sass": "watch --interval 0.1 'yarn run sass && yarn run postcss' assets/_sass",
     "watch:js": "watch --interval 0.1 'yarn run eslint && yarn run concat' assets/_js",
-    "dist": "yarn run mkdirp && parallelshell 'yarn run dist:css' 'yarn run dist:js' 'yarn run imagemin'",
-    "dist:mkdirp": "mkdirp dist/assets/js dist/assets/css mkdirp dist/assets/images",
+    "build": "parallelshell 'yarn run css' 'yarn run js'",
+    "dist": "yarn run dist:mkdirp && parallelshell 'yarn run dist:css' 'yarn run dist:js' 'yarn run imagemin'",
+    "dist:mkdirp": "mkdirp dist/assets/js",
     "dist:css": "yarn run dist:postcss",
     "dist:js": "yarn run uglify"
   }
