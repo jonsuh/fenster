@@ -102,7 +102,7 @@ gulp.task('watch', function() {
 
 gulp.task('build', ['css', 'js']);
 
-gulp.task('dist', ['build'], function() {
+gulp.task('dist', function() {
   gulp.start('dist:css');
   gulp.start('dist:js');
   gulp.start('imagemin');
