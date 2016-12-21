@@ -25,7 +25,7 @@ var plumberOptions = {
   errorHandler: onError,
 };
 
-gulp.task('sass', function() {
+gulp.task('css', function() {
   var sassOptions = {
     includePaths: [
       // 'node_modules/',
@@ -65,7 +65,7 @@ gulp.task('eslint', function() {
     .pipe(eslint.failAfterError());
 });
 
-gulp.task('concat', ['eslint'], function() {
+gulp.task('js', ['eslint'], function() {
   return gulp.src([
       'assets/_js/app.js',
     ])
@@ -96,11 +96,11 @@ gulp.task('watch', function() {
 
   browserSync.init(browserSyncConfig);
 
-  gulp.watch('assets/_sass/**/*.scss', ['sass']);
-  gulp.watch('assets/_js/**/*.js', ['concat']);
+  gulp.watch('assets/_sass/**/*.scss', ['css']);
+  gulp.watch('assets/_js/**/*.js', ['js']);
 });
 
-gulp.task('build', ['sass', 'concat']);
+gulp.task('build', ['css', 'js']);
 
 gulp.task('dist', ['build'], function() {
   gulp.start('dist:css');
