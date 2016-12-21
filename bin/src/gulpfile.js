@@ -48,9 +48,8 @@ gulp.task('sass', function() {
 
 gulp.task('dist:css', function() {
   var postCSSOptions = require('./config.postcss.dist.json');
-  var combCSSConfig = require('./.csscomb.dist.json');
   var postCSSProcessors = [
-    csscomb(combCSSConfig),
+    csscomb(postCSSOptions['postcss-csscomb']),
     cssnano()
   ];
 
