@@ -1,13 +1,14 @@
 var gulp         = require('gulp');
 var browserSync  = require('browser-sync');
-var autoprefixer = require('gulp-autoprefixer');
+var autoprefixer = require('autoprefixer');
 var concat       = require('gulp-concat');
-var csscomb      = require('gulp-csscomb');
-var cssnano      = require('gulp-cssnano');
+var csscomb      = require('postcss-csscomb');
+var cssnano      = require('cssnano');
 var eslint       = require('gulp-eslint');
 var imagemin     = require('gulp-imagemin');
 var notify       = require('gulp-notify');
 var plumber      = require('gulp-plumber');
+var postcss      = require('gulp-postcss');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var uglify       = require('gulp-uglify');
@@ -25,28 +26,36 @@ var plumberOptions = {
 };
 
 gulp.task('sass', function() {
-  var postCSSOptions = require('./config.postcss.json');
-  var autoprefixerOptions = postCSSOptions.autoprefixer;
-
   var sassOptions = {
     includePaths: [
       // 'node_modules/',
     ]
   };
 
+  var postCSSOptions = require('./config.postcss.json');
+  var postCSSProcessors = [
+    autoprefixer(postCSSOptions.autoprefixer),
+  ];
+
   return gulp.src('assets/_sass/**/*.scss')
     .pipe(plumber(plumberOptions))
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions))
-    .pipe(autoprefixer(autoprefixerOptions))
+    .pipe(postcss(postCSSProcessors))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('assets/css'));
 });
 
 gulp.task('dist:css', function() {
+  var postCSSOptions = require('./config.postcss.dist.json');
+  var combCSSConfig = require('./.csscomb.dist.json');
+  var postCSSProcessors = [
+    csscomb(combCSSConfig),
+    cssnano()
+  ];
+
   return gulp.src('assets/css/**/*.css')
-    .pipe(csscomb('.csscomb.dist.json'))
-    .pipe(cssnano())
+    .pipe(postcss(postCSSProcessors))
     .pipe(gulp.dest('dist/assets/css'));
 });
 
