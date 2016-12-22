@@ -24,6 +24,7 @@ if (flag === "-t" || flag === "--type") {
           break;
         case "grunt":
           // copy Gruntfile.js
+          copyFile("bin/src/Gruntfile.js", "Gruntfile.js");
           break;
       }
     }
