@@ -89,6 +89,19 @@ module.exports = function(grunt) {
       },
     },
 
+    imagemin: {
+      dist: {
+        options: {
+        },
+        files: [{
+          expand: true,
+          cwd : 'assets/images',
+          src : ['**'],
+          dest: 'dist/assets/images',
+        }],
+      },
+    },
+
     watch: {
       js: {
         files: ['assets/_js/**/*.js'],
@@ -111,9 +124,10 @@ module.exports = function(grunt) {
   grunt.registerTask('css', ['sass:build', 'postcss:build']);
   grunt.registerTask('js', ['force:eslint', 'concat:build']);
 
-  grunt.registerTask('dist', ['dist:css', 'dist:js']);
+  grunt.registerTask('dist', ['dist:css', 'dist:js', 'imagemin:dist']);
   grunt.registerTask('dist:css', ['postcss:dist']);
   grunt.registerTask('dist:js', ['uglify:dist']);
+  grunt.registerTask('dist:images', ['imagemin:dist']);
 
   grunt.registerTask('default', ['build', 'browserSync', 'watch']);
 };
