@@ -1,8 +1,6 @@
 {
   "use": ["postcss-csscomb", "cssnano"],
-  "cssnano": {
-
-  },
+  "cssnano": {},
   "postcss-csscomb": {
     "always-semicolon": true,
     "block-indent": "    ",
