@@ -49,9 +49,19 @@ catch(error) {
 typeFile = JSON.parse(typeFile);
 
 
-// Replace the devDependencies and scripts contents of package.json with package.type.json
+// Add or update devDependencies of package.json with package.type.json
 packageFile.devDependencies = typeFile.devDependencies;
-packageFile.scripts         = typeFile.scripts;
+
+for (let key in typeFile.devDependencies) {
+  packageFile.devDependencies[key] = typeFile.devDependencies[key];
+}
+
+// Add or update scripts of package.json with package.type.json
+packageFile.scripts = typeFile.scripts;
+
+for (let script in typeFile.scripts) {
+  packageFile.scripts[script] = typeFile.scripts[script];
+}
 
 
 // Write the new contents to package.json
