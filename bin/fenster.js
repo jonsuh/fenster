@@ -1,12 +1,22 @@
 #! /usr/bin/env node
 const fs = require("fs");
 const path = require("path");
+const colors = {
+  "red"    : "\x1b[31m",
+  "green"  : "\x1b[32m",
+  "yellow" : "\x1b[33m",
+  "blue"   : "\x1b[34m",
+  "magenta": "\x1b[35m",
+  "cyan"   : "\x1b[36m",
+  "default": "\x1b[0m"
+};
 
 
 // Check if package.json exists
 // Create file if false exist
 if (! fs.existsSync("package.json")) {
   try {
+    console.log(colors.yellow, "!", colors.default, "package.json doesn’t exist. One has been created.");
     fs.writeFileSync("package.json", "{}", "utf8");
   }
   catch(error) {
@@ -22,7 +32,7 @@ try {
     JSON.parse(fs.readFileSync("package.json", "utf8"));
   }
   catch(error) {
-    console.log("Error Invalid JSON in package.json");
+    console.log(colors.red, "✘", colors.default, "Invalid JSON in package.json");
     process.exit(1);
   }
 }
@@ -98,6 +108,26 @@ for (let script in typeFile.scripts) {
 // Write the new contents to package.json
 try {
   fs.writeFile("package.json", JSON.stringify(packageFile, null, 2));
+
+  let message = colors.cyan + "package.json" + colors.default + " has been updated to include " + type + " devDependencies";
+
+  if (type === "yarn" || type === "npm") {
+    message += " and scripts";
+  }
+
+  message += ".";
+  console.log("\n" + colors.green, "✔", colors.default, message);
+
+  if (type === "gulp" || type === "grunt") {
+    if (type === "grunt") {
+      type = "Grunt";
+    }
+    message = colors.magenta + type + "file.js" + colors.default + " has been created in the root directory.";
+    console.log(colors.green, "✔", colors.default, message);
+  }
+
+  message = "Don’t forget to run " + colors.yellow + "yarn" + colors.default + " or " + colors.yellow + "npm install" + colors.default + ". Otherwise, you’re good to go!\n";
+  console.log(colors.green, "🚀", colors.default, message);
 }
 catch(error) {
   if (error) {
