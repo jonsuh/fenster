@@ -29,10 +29,12 @@
     "css": "npm run sass && npm run postcss",
     "js": "npm run eslint && npm run concat",
     "build": "parallelshell 'npm run css' 'npm run js'",
-    "dist": "npm run dist:mkdirp && parallelshell 'npm run dist:css' 'npm run dist:js' 'npm run imagemin'",
+    "dist": "npm run dist:mkdirp && parallelshell 'npm run dist:css' 'npm run dist:js'",
     "dist:mkdirp": "mkdirp dist/assets/js",
     "dist:postcss": "postcss --config config.postcss.dist.json --no-map --dir dist/assets/css assets/css/*.css",
     "dist:css": "npm run dist:postcss",
-    "dist:js": "npm run uglify"
+    "dist:js": "npm run uglify",
+    "dist:images": "npm run imagemin",
+    "dist:all": "parallelshell 'npm run dist' 'npm run dist:images'"
   }
 }

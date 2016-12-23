@@ -29,10 +29,12 @@
     "css": "yarn run sass && yarn run postcss",
     "js": "yarn run eslint && yarn run concat",
     "build": "parallelshell 'yarn run css' 'yarn run js'",
-    "dist": "yarn run dist:mkdirp && parallelshell 'yarn run dist:css' 'yarn run dist:js' 'yarn run imagemin'",
+    "dist": "yarn run dist:mkdirp && parallelshell 'yarn run dist:css' 'yarn run dist:js'",
     "dist:mkdirp": "mkdirp dist/assets/js",
     "dist:postcss": "postcss --config config.postcss.dist.json --no-map --dir dist/assets/css assets/css/*.css",
     "dist:css": "yarn run dist:postcss",
-    "dist:js": "yarn run uglify"
+    "dist:js": "yarn run uglify",
+    "dist:images": "yarn run imagemin",
+    "dist:all": "parallelshell 'yarn run dist' 'yarn run dist:images'"
   }
 }

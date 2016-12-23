@@ -124,10 +124,11 @@ module.exports = function(grunt) {
   grunt.registerTask('css', ['sass:build', 'postcss:build']);
   grunt.registerTask('js', ['force:eslint', 'concat:build']);
 
-  grunt.registerTask('dist', ['dist:css', 'dist:js', 'imagemin:dist']);
+  grunt.registerTask('dist', ['dist:css', 'dist:js']);
   grunt.registerTask('dist:css', ['postcss:dist']);
   grunt.registerTask('dist:js', ['uglify:dist']);
   grunt.registerTask('dist:images', ['imagemin:dist']);
+  grunt.registerTask('dist:all', ['dist', 'dist:images']);
 
   grunt.registerTask('default', ['build', 'browserSync', 'watch']);
 };

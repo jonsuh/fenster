@@ -105,7 +105,14 @@ gulp.task('build', ['css', 'js']);
 gulp.task('dist', function() {
   gulp.start('dist:css');
   gulp.start('dist:js');
+});
+
+gulp.task('dist:images', function() {
   gulp.start('imagemin');
 });
+
+gulp.task('dist:all', ['dist'], function() {
+  gulp.start('dist:images');
+})
 
 gulp.task('default', ['build', 'watch']);
