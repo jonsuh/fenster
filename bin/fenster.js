@@ -116,7 +116,7 @@ try {
   }
 
   message += ".";
-  console.log("\n" + colors.green, "✔", colors.default, message);
+  console.log(colors.green, "✔", colors.default, message);
 
   if (type === "gulp" || type === "grunt") {
     if (type === "grunt") {
@@ -126,7 +126,7 @@ try {
     console.log(colors.green, "✔", colors.default, message);
   }
 
-  message = "Don’t forget to run " + colors.yellow + "yarn" + colors.default + " or " + colors.yellow + "npm install" + colors.default + ". Otherwise, you’re good to go!\n";
+  message = "Don’t forget to run " + colors.yellow + "yarn" + colors.default + " or " + colors.yellow + "npm install" + colors.default + ". Otherwise, you’re good to go!";
   console.log(colors.green, "🚀", colors.default, message);
 }
 catch(error) {
