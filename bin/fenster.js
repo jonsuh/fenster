@@ -2,7 +2,17 @@
 const fs = require("fs");
 const path = require("path");
 
-let packageFile = require("../package.json");
+
+// Try to get and validate package.json
+try {
+  let packageFile = require("../package.json");
+}
+catch(error) {
+  console.log("Error Invalid JSON detected in package.json");
+  console.log(error);
+  process.exit(1);
+}
+
 
 const typeDefault = "yarn";
 let type          = typeDefault;
