@@ -17,7 +17,6 @@
   "scripts": {
     "sass": "node-sass assets/_sass --output assets/css; exit 0",
     "postcss": "postcss --config config.postcss.json --map inline --dir assets/css assets/css/*.css",
-    "dist:postcss": "postcss --config config.postcss.dist.json --no-map --dir dist/assets/css assets/css/*.css",
     "concat": "source-map-concat assets/_js/app.js --output assets/js/app.js",
     "eslint": "eslint --config '.eslintrc' assets/_js/**/*.js; exit 0",
     "uglify": "uglifyjs --compress --mangle --output dist/assets/js/app.js assets/js/app.js",
@@ -32,6 +31,7 @@
     "build": "parallelshell 'npm run css' 'npm run js'",
     "dist": "npm run dist:mkdirp && parallelshell 'npm run dist:css' 'npm run dist:js' 'npm run imagemin'",
     "dist:mkdirp": "mkdirp dist/assets/js",
+    "dist:postcss": "postcss --config config.postcss.dist.json --no-map --dir dist/assets/css assets/css/*.css",
     "dist:css": "npm run dist:postcss",
     "dist:js": "npm run uglify"
   }
