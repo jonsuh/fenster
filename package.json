@@ -20,7 +20,6 @@
   "scripts": {
     "sass": "node-sass assets/_sass --output assets/css; exit 0",
     "postcss": "postcss --config config.postcss.json --map inline --dir assets/css assets/css/*.css",
-    "dist:postcss": "postcss --config config.postcss.dist.json --no-map --dir dist/assets/css assets/css/*.css",
     "concat": "source-map-concat assets/_js/app.js --output assets/js/app.js",
     "eslint": "eslint --config '.eslintrc' assets/_js/**/*.js; exit 0",
     "uglify": "uglifyjs --compress --mangle --output dist/assets/js/app.js assets/js/app.js",
@@ -33,9 +32,12 @@
     "css": "yarn run sass && yarn run postcss",
     "js": "yarn run eslint && yarn run concat",
     "build": "parallelshell 'yarn run css' 'yarn run js'",
-    "dist": "yarn run dist:mkdirp && parallelshell 'yarn run dist:css' 'yarn run dist:js' 'yarn run imagemin'",
+    "dist": "yarn run dist:mkdirp && parallelshell 'yarn run dist:css' 'yarn run dist:js'",
     "dist:mkdirp": "mkdirp dist/assets/js",
+    "dist:postcss": "postcss --config config.postcss.dist.json --no-map --dir dist/assets/css assets/css/*.css",
     "dist:css": "yarn run dist:postcss",
-    "dist:js": "yarn run uglify"
+    "dist:js": "yarn run uglify",
+    "dist:images": "yarn run imagemin",
+    "dist:all": "parallelshell 'yarn run dist' 'yarn run dist:images'"
   }
 }
