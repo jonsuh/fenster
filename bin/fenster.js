@@ -3,15 +3,36 @@ const fs = require("fs");
 const path = require("path");
 
 
+// Check if package.json exists
+// Create file if false exist
+if (! fs.existsSync("package.json")) {
+  try {
+    fs.writeFileSync("package.json", "{}", "utf8");
+  }
+  catch(error) {
+    console.log(error);
+    process.exit(1);
+  }
+}
+
+
 // Try to get and validate package.json
 try {
-  let packageFile = require("../package.json");
+  try {
+    JSON.parse(fs.readFileSync("package.json", "utf8"));
+  }
+  catch(error) {
+    console.log("Error Invalid JSON in package.json");
+    process.exit(1);
+  }
 }
 catch(error) {
-  console.log("Error Invalid JSON detected in package.json");
   console.log(error);
   process.exit(1);
 }
+
+
+let packageFile = require("../package.json");
 
 
 const typeDefault = "yarn";
