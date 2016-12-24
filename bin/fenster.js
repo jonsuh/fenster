@@ -91,15 +91,11 @@ typeFile = JSON.parse(typeFile);
 
 
 // Add or update devDependencies of package.json with package.type.json
-packageFile.devDependencies = typeFile.devDependencies;
-
 for (let key in typeFile.devDependencies) {
   packageFile.devDependencies[key] = typeFile.devDependencies[key];
 }
 
 // Add or update scripts of package.json with package.type.json
-packageFile.scripts = typeFile.scripts;
-
 for (let script in typeFile.scripts) {
   packageFile.scripts[script] = typeFile.scripts[script];
 }
