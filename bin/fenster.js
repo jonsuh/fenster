@@ -17,7 +17,7 @@ const colors = {
 if (! fs.existsSync("package.json")) {
   try {
     console.log(colors.yellow, "!", colors.default, "package.json doesn’t exist. One has been created.");
-    fs.writeFileSync("package.json", "{}", "utf8");
+    fs.writeFileSync("package.json", "{}\n", "utf8");
   }
   catch(error) {
     console.log(error);
