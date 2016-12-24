@@ -16,7 +16,7 @@ const colors = {
 // Create file if false exist
 if (! fs.existsSync("package.json")) {
   try {
-    console.log(colors.yellow, "!", colors.default, "package.json doesn’t exist. One has been created.");
+    console.log(colors.yellow, "!!", colors.cyan + "package.json " + colors.default + "doesn’t exist. One has been created.");
     fs.writeFileSync("package.json", "{}\n", "utf8");
   }
   catch(error) {
@@ -32,7 +32,7 @@ try {
     JSON.parse(fs.readFileSync("package.json", "utf8"));
   }
   catch(error) {
-    console.log(colors.red, "✘", colors.default, "Invalid JSON in package.json");
+    console.log(colors.red, "✘", colors.default, "Invalid JSON in package.json.");
     process.exit(1);
   }
 }
@@ -118,7 +118,6 @@ try {
   if (type === "yarn" || type === "npm") {
     message += " and scripts";
   }
-
   message += ".";
   console.log(colors.green, "✔", colors.default, message);
 
