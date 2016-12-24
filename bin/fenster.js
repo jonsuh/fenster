@@ -90,11 +90,19 @@ catch(error) {
 typeFile = JSON.parse(typeFile);
 
 
+// Check if devDependencies key exists is an object
+if (packageFile.devDependencies === undefined || typeof(packageFile.devDependencies !== "object")) {
+  packageFile.devDependencies = {};
+}
 // Add or update devDependencies of package.json with package.type.json
 for (let key in typeFile.devDependencies) {
   packageFile.devDependencies[key] = typeFile.devDependencies[key];
 }
 
+// Check if scripts key exists is an object
+if (packageFile.scripts === undefined || typeof(packageFile.scripts !== "object")) {
+  packageFile.scripts = {};
+}
 // Add or update scripts of package.json with package.type.json
 for (let script in typeFile.scripts) {
   packageFile.scripts[script] = typeFile.scripts[script];
