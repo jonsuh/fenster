@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "autoprefixer": "^6.5.4",
+    "autoprefixer": "^6.6.0",
     "cssnano": "^3.9.1",
     "grunt": "^1.0.1",
     "grunt-browser-sync": "^2.2.0",
