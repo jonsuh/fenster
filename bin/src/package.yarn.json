@@ -1,18 +1,18 @@
 {
   "devDependencies": {
-    "autoprefixer": "^6.6.0",
-    "browser-sync": "^2.18.5",
-    "cssnano": "^3.9.1",
-    "eslint": "^3.12.2",
+    "autoprefixer": "^6.7.7",
+    "browser-sync": "^2.18.8",
+    "cssnano": "^3.10.0",
+    "eslint": "^3.19.0",
     "imagemin-cli": "^3.0.0",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.1.0",
+    "node-sass": "^4.5.2",
     "parallelshell": "^2.0.0",
-    "postcss-cli": "^2.6.0",
+    "postcss-cli": "^3.0.0",
     "postcss-csscomb": "^1.0.2",
     "source-map-concat-cli": "^1.0.0",
-    "uglify-js": "^2.7.5",
-    "watch": "^1.0.1"
+    "uglify-js": "^2.8.21",
+    "watch": "^1.0.2"
   },
   "scripts": {
     "sass": "node-sass assets/_sass --output assets/css; exit 0",
